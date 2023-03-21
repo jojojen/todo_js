@@ -31,12 +31,24 @@ export class TodoComponent implements OnInit {
     });
   }
 
-  updateTodo(id: string, updatedTodo: any) {
-    this.todoService.updateTodo(id, updatedTodo).subscribe((todo) => {
-      const index = this.todos.findIndex((t) => t._id === todo._id);
-      this.todos[index] = todo;
+  toggleEdit(todo: any): void {
+    if (!todo.editing) {
+      todo.newTitle = todo.title;
+    }
+    todo.editing = !todo.editing;
+  }
+  
+  updateTodo(todo: any) {
+    const updatedTodo = {
+      title: todo.newTitle || todo.title,
+      done: todo.done,
+    };
+    this.todoService.updateTodo(todo._id, updatedTodo).subscribe((res) => {
+      todo.title = res.title;
+      todo.done = res.done;
     });
   }
+  
 
   updateTodoTitle(id: string, newTitle: string) {
     this.todoService.updateTodo(id, { title: newTitle }).subscribe((todo) => {

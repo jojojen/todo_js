@@ -8,8 +8,12 @@
 
 <ul>
   <li *ngFor="let todo of todos">
-    <input type="checkbox" [(ngModel)]="todo.done" (click)="updateTodoStatus(todo)" />
-    <input [(ngModel)]="todo.title" (blur)="updateTodoTitle(todo._id, todo.title)" />
+    <input type="checkbox" [checked]="todo.done" (click)="updateTodoStatus(todo)" />
+    <ng-container *ngIf="!todo.editing">{{ todo.title }}</ng-container>
+    <input [(ngModel)]="todo.newTitle" (blur)="updateTodo(todo)" *ngIf="todo.editing" />
+    <button (click)="toggleEdit(todo)">{{ todo.editing ? 'Save' : 'Edit' }}</button>
     <button (click)="deleteTodo(todo._id)">Delete</button>
   </li>
 </ul>
+
+
