@@ -1,19 +1,21 @@
 <!-- src/app/todo/todo.component.html -->
-<h1>Todo List</h1>
-
-<div class="container">
-  <input placeholder="Add a new todo" [(ngModel)]="newTodo" (keyup.enter)="addTodo()" />
-  <button (click)="addTodo()">Add</button>
+<div class="app-container">
+  <div class="header-container">
+    <h1>Todo List</h1>
+    <div class="container">
+      <input placeholder="Add a new todo" [(ngModel)]="newTodo" (keyup.enter)="addTodo()" />
+      <button (click)="addTodo()">Add</button>
+    </div>
+  </div>
+  <ul>
+    <li *ngFor="let todo of todos">
+      <input type="checkbox" [checked]="todo.done" (click)="updateTodoStatus(todo)" />
+      <div class="title-container">
+        <ng-container *ngIf="!todo.editing">{{ todo.title }}</ng-container>
+        <input [(ngModel)]="todo.newTitle" (blur)="updateTodo(todo)" *ngIf="todo.editing" />  
+      </div>
+      <button (click)="toggleEdit(todo)">{{ todo.editing ? 'Save' : 'Edit' }}</button>
+      <button (click)="deleteTodo(todo._id)">Delete</button>
+    </li>
+  </ul>
 </div>
-
-<ul>
-  <li *ngFor="let todo of todos">
-    <input type="checkbox" [checked]="todo.done" (click)="updateTodoStatus(todo)" />
-    <ng-container *ngIf="!todo.editing">{{ todo.title }}</ng-container>
-    <input [(ngModel)]="todo.newTitle" (blur)="updateTodo(todo)" *ngIf="todo.editing" />
-    <button (click)="toggleEdit(todo)">{{ todo.editing ? 'Save' : 'Edit' }}</button>
-    <button (click)="deleteTodo(todo._id)">Delete</button>
-  </li>
-</ul>
-
-
