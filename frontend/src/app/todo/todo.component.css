@@ -16,12 +16,6 @@
     margin-bottom: 1.5rem;
   }
   
-  .container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 1rem;
-  }
-  
   input[type='text'] {
     padding: 0.5rem 1rem;
     width: 100%;
@@ -71,6 +65,13 @@
     justify-content: center;
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .add-container {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    margin-bottom: 1rem;
   }
 
   .title-container {
