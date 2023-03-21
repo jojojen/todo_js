@@ -8,8 +8,8 @@
 
 <ul>
   <li *ngFor="let todo of todos">
-    <input type="checkbox" [(ngModel)]="todo.done" (change)="updateTodo(todo._id, { done: todo.done })" />
-    <span>{{ todo.title }}</span>
+    <input type="checkbox" [(ngModel)]="todo.done" (click)="updateTodoStatus(todo)" />
+    <input [(ngModel)]="todo.title" (blur)="updateTodoTitle(todo._id, todo.title)" />
     <button (click)="deleteTodo(todo._id)">Delete</button>
   </li>
 </ul>

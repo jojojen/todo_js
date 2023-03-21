@@ -38,6 +38,20 @@ export class TodoComponent implements OnInit {
     });
   }
 
+  updateTodoTitle(id: string, newTitle: string) {
+    this.todoService.updateTodo(id, { title: newTitle }).subscribe((todo) => {
+      const index = this.todos.findIndex((t) => t._id === todo._id);
+      this.todos[index].title = newTitle;
+    });
+  }
+
+  updateTodoStatus(todo: any) {
+    const newStatus = !todo.done;
+    this.todoService.updateTodo(todo._id, { done: newStatus }).subscribe((updatedTodo) => {
+      todo.done = newStatus;
+    });
+  }
+
   deleteTodo(id: string) {
     this.todoService.deleteTodo(id).subscribe(() => {
       this.todos = this.todos.filter((t) => t._id !== id);

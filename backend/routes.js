@@ -140,21 +140,21 @@ router.post("/todos", async (req, res) => {
  *               $ref: '#/components/schemas/Todo'
  */
 router.patch("/todos/:id", async (req, res) => {
-    try {
-        const todo = await Todo.findOne({ _id: req.params.id })
-        if(req.body.title) {
-            todo.title = req.body.title
-        }
-        if(req.body.done) {
-            todo.done = req.body.done
-        }
-        await todo.save()
-        res.send(todo)
-    } catch (err) {
-        res.status(404)
-        res.send({ error: err})
+  try {
+    const todo = await Todo.findOne({ _id: req.params.id });
+    if (req.body.title) {
+      todo.title = req.body.title;
     }
-})
+    if (req.body.done !== undefined) {
+      todo.done = req.body.done;
+    }
+    await todo.save();
+    res.send(todo);
+  } catch (err) {
+    res.status(404);
+    res.send({ error: err });
+  }
+});
 
 /**
  * @swagger
