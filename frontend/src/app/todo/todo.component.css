@@ -16,6 +16,10 @@
     margin-bottom: 1.5rem;
   }
   
+  input[placeholder='Add a new todo'] {
+    width: 330px; /* 更改此行以設置輸入框的預設寬度 */
+  }
+  
   input[type='text'] {
     padding: 0.5rem 1rem;
     width: 100%;
