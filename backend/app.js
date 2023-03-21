@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const routes = require('./routes');
 const swaggerUi = require('swagger-ui-express')
 const swaggerJsdoc = require('swagger-jsdoc')
+const cors = require('cors'); // Import CORS
 
 const options = {
     definition: {
@@ -29,8 +30,9 @@ async function listCollections() {
 mongoose
   .connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
-    const app = express();
+    const app = express();    
     // middleware
+    app.use(cors());
     app.use(express.json());
     app.use(express.urlencoded({ extended: false }));
     // routers for http req
