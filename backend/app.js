@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
@@ -18,7 +19,7 @@ const options = {
 }
 const swaggerSpec = swaggerJsdoc(options);
 
-const uri = 'my connect';
+const uri = process.env.MONGODB_URI;
 
 async function listCollections() {
   const collectionList = await mongoose.connection.db.listCollections().toArray();
@@ -43,8 +44,9 @@ mongoose
     // List collections after connecting to the database
     listCollections();
 
-    app.listen(5000, () => {
-      console.log('Server has started!');
+    const port = process.env.PORT || 5000;
+    app.listen(port, () => {
+      console.log(`Server has started on port ${port}!`);
     });
   })
   .catch((err) => {
